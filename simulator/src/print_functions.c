@@ -8,24 +8,36 @@
  * the behavior of our schedulers.
 **/
 
-void print_tab_of_int (int arr[], int n)
+//~ void print_tab_of_int (int arr[], int n)
+//~ {
+	//~ for (int i = 0; i < n; i++)
+	//~ {
+		//~ printf("| %d", arr[i]); fflush(stdout);
+	//~ }
+	//~ printf("\n"); fflush(stdout);
+//~ }
+
+void print_job_list(struct Job* list)
 {
-	for (int i = 0; i < n; i++)
+	printf("\nJob list:\n");
+	struct Job* j = list;
+	while (j != NULL)
 	{
-		printf("| %d", arr[i]); fflush(stdout);
+		printf("Id: %d Function_name: %s Subtime %f Build_time %f Start_time_cold %f Start_time_hot %f Runtime %f\n", j->unique_id, j->function_name, j->subtime, j->build_time, j->start_time_cold, j->start_time_hot, j->runtime);
+		j = j->next;
 	}
-	printf("\n"); fflush(stdout);
 }
 
-//~ void print_job_list(struct Job* list)
-//~ {
-	//~ struct Job* j = list;
-	//~ while (j != NULL)
-	//~ {
-		//~ printf("Id: %d Subtime: %d Delay: %d Walltime: %d Cores: %d Data: %d Data_size: %f Data_category: %d Workload: %d Start_time_from_history: %d Node_from_history: %d\n", j->unique_id, j->subtime, j->delay, j->walltime, j->cores, j->data, j->data_size, j->index_node_list, j->workload, j->start_time_from_history, j->node_from_history); fflush(stdout);
-		//~ j = j->next;
-	//~ }
-//~ }
+void print_valid_build_times(struct Valid_Build* list)
+{
+	printf("\nValid times:\n");
+	struct Valid_Build* j = list;
+	while (j != NULL)
+	{
+		printf("job_name: %s earliest_valid_build_complete: %f latest_valid_finish_time %f\n", j->job_name, j->earliest_valid_build_complete, j->latest_valid_finish_time);
+		j = j->next;
+	}
+}
 
 //~ void print_job_to_print(struct To_Print* tp)
 //~ {
@@ -162,9 +174,9 @@ void print_tab_of_int (int arr[], int n)
 	//~ #endif
 //~ }
 
-//~ /** Print in a file the final results. Only called once at the end of the simulation. **/
-//~ void print_csv(struct To_Print* head_to_print)
-//~ {
+/** Print in a file the final results. Only called once at the end of the simulation. **/
+void print_csv(struct To_Print* head_to_print)
+{
 	//~ printf("nb_call_finished_jobs: %d - nb_call_new_jobs: %d\n", nb_call_finished_jobs, nb_call_new_jobs); fflush(stdout);
 	
 	//~ int size_file_to_open = 300;
@@ -608,4 +620,4 @@ void print_tab_of_int (int arr[], int n)
 	
 	//~ free(file_to_open);
 	//~ free(file_to_open_2);
-//~ }
+}

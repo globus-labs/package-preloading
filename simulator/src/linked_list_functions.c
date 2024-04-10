@@ -38,19 +38,33 @@ void insert_tail_job_list(struct Job_List* liste, struct Job* j)
     }
 }
 
-//~ void insert_tail_to_print_list(struct To_Print_List* liste, struct To_Print* tp)
-//~ {
-	//~ if (liste->head == NULL)
-	//~ {
-		//~ liste->head = tp;
-		//~ liste->tail = tp;
-	//~ }
-	//~ else
-	//~ {
-		//~ liste->tail->next = tp;
-		//~ liste->tail = tp;
-	//~ }
-//~ }
+void insert_tail_to_print_list(struct To_Print_List* liste, struct To_Print* tp)
+{
+	if (liste->head == NULL)
+	{
+		liste->head = tp;
+		liste->tail = tp;
+	}
+	else
+	{
+		liste->tail->next = tp;
+		liste->tail = tp;
+	}
+}
+
+void insert_tail_valid_build_list(struct Valid_Build_List* liste, struct Valid_Build* tp)
+{
+	if (liste->head == NULL)
+	{
+		liste->head = tp;
+		liste->tail = tp;
+	}
+	else
+	{
+		liste->tail->next = tp;
+		liste->tail = tp;
+	}
+}
 
 //~ void insert_tail_data_list(struct Data_List* liste, struct Data* d)
 //~ {
