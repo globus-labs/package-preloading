@@ -33,13 +33,7 @@ void hot_start(struct Job* j, struct To_Print* new_to_print, int max_time_betwee
 			break;
 		}
 	}
-	
-	//~ Hot start = cold for first function of each type then it's the mean starttime1 to starttimex + runtime of the function
-	//use valid to print list ot search the job and now if it's valid
-	//~ new_to_print->runtime = j->runtime;
-	//~ new_to_print->start_time = j->start_time_cold;
-	//~ new_to_print->build_time = j->build_time;
-	
+		
 	if (hot_start_available == false)
 	{
 		/* Update values */
@@ -63,7 +57,7 @@ void hot_start(struct Job* j, struct To_Print* new_to_print, int max_time_betwee
 		new_to_print->runtime = j->runtime;
 		new_to_print->start_time = j->start_time_hot;
 		new_to_print->build_time = 0;
-			
+
 		/* Update valid times */
 		update_valid_build_times(valid_build, j->subtime + j->build_time, j-> subtime + j->build_time + j->start_time_cold + j->runtime + max_time_between_hot_start);
 	}

@@ -8,15 +8,6 @@
  * the behavior of our schedulers.
 **/
 
-//~ void print_tab_of_int (int arr[], int n)
-//~ {
-	//~ for (int i = 0; i < n; i++)
-	//~ {
-		//~ printf("| %d", arr[i]); fflush(stdout);
-	//~ }
-	//~ printf("\n"); fflush(stdout);
-//~ }
-
 void print_job_list(struct Job* list)
 {
 	printf("\nJob list:\n");
@@ -174,13 +165,32 @@ void print_valid_build_times(struct Valid_Build* list)
 	//~ #endif
 //~ }
 
-/** Print in a file the final results. Only called once at the end of the simulation. **/
-void print_csv(struct To_Print* head_to_print)
+void print_csv_container(struct To_Print* head_to_print)
 {
-	//~ printf("nb_call_finished_jobs: %d - nb_call_new_jobs: %d\n", nb_call_finished_jobs, nb_call_new_jobs); fflush(stdout);
-	
-	//~ int size_file_to_open = 300;
+	FILE *f;
+	int unique_id = 0;
+	f = fopen(output_file, "w");
+	if (!f)
+	{
+		perror("Error opening file in print_csv_energy_incentive.\n"); fflush(stdout);
+		exit(EXIT_FAILURE);
+	}
+	printf("Writing outputs in %s\n", output_file);
 
+	fprintf(f, "Job_unique_id, Job_shared_id, Container_mode, Runtime, Start_time, Build_time\n");
+	while (head_to_print != NULL)
+	{
+		fprintf(f, "%d, %d, %d, %f, %f, %f\n", unique_id, head_to_print->unique_id, head_to_print->container_mode, head_to_print->runtime, head_to_print->start_time, head_to_print->build_time);
+		head_to_print = head_to_print->next;
+		unique_id++;
+	}
+	fclose(f);
+}
+
+
+/* Print in a file the final results. Only called once at the end of the simulation. */
+//~ void print_csv(struct To_Print* head_to_print)
+//~ {
 	//~ /* Stretch times for boxplots on all jobs */
 	//~ char* file_to_open = malloc(size_file_to_open*sizeof(char));
 	//~ char* day = malloc(22*sizeof(char));
@@ -620,4 +630,4 @@ void print_csv(struct To_Print* head_to_print)
 	
 	//~ free(file_to_open);
 	//~ free(file_to_open_2);
-}
+//~ }

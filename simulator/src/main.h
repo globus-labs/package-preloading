@@ -97,25 +97,13 @@ struct To_Print {
 	double build_time;
 };
 
-
 /* From read_input_files.c */
 void read_workload(char* input_job_file);
 
 /* From print_functions.c */
-//~ void print_node_list(struct Node_List** list);
 void print_job_list(struct Job* list);
-//~ void to_print_job_csv(struct Job* job, int time);
-void print_csv(struct To_Print* head_to_print);
+void print_csv_container(struct To_Print* head_to_print);
 void print_valid_build_times(struct Valid_Build* list);
-//~ void print_data_intervals(struct Node_List** list, int t);
-//~ void print_tab_of_int (int arr[], int n);
-//~ void print_holes(struct Node_List** head_node);
-//~ void print_holes_specific_node(struct Node* n);
-//~ void save_state(int t, int old_finished_jobs, int next_submit_time, char* input_job_file);
-//~ void resume_state(int* t, int* old_finished_jobs, int* next_submit_time, char* input_job_file);
-//~ void print_job_to_print(struct To_Print* tp);
-
-/* From basic_functions.c */
 
 /* From container_functions.c */
 void cold_start(struct Job* j, struct To_Print* new_to_print);

@@ -2,54 +2,13 @@
 
 char* input_job_file;
 
-//~ int planned_or_ratio; /* O = planned, 1 = ratio */
-//~ int constraint_on_sizes;
-//~ int nb_cores;
-//~ int nb_job_to_evaluate;
 int finished_jobs;
 int total_number_jobs;
-//~ int total_number_jobs_no_repetition;
-//~ int total_number_nodes;
 struct Valid_Build_List* valid_build_list; /* Give the last start of each type of job */
 struct Job_List* job_list; /* All jobs not available yet */
-//~ struct Job_List* new_job_list; /* New available jobs */
-//~ struct Job_List* job_list_to_start_from_history; /* With -2 and before start */
-//~ struct Job_List* scheduled_job_list; /* Scheduled or available */
-//~ struct Job_List* running_jobs; /* Started */
-//~ struct Node_List** node_list;
 struct To_Print_List* jobs_to_print_list;
-//~ int running_cores;
-//~ int running_nodes;
-//~ #ifdef PRINT_CLUSTER_USAGE
-//~ int running_cores_from_workload_1;
-//~ int running_nodes_workload_1;
-//~ int mixed_mode;
-//~ #endif
-//~ int total_queue_time;
-//~ int first_subtime_day_0;
-//~ int nb_job_to_schedule;
-//~ int nb_cores_to_schedule;
 char* scheduler;
 char* output_file;
-//~ struct Next_Time_List* end_times;
-//~ struct Next_Time_List* start_times;
-//~ int nb_job_to_evaluate_started;
-//~ long long Allocated_Area[3][3];
-//~ long long Planned_Area[3][3];
-//~ int number_node_size[3];
-//~ int busy_cluster;
-//~ int backfill_mode;
-//~ #ifdef PLOT_STATS
-//~ int number_of_backfilled_jobs;
-//~ int number_of_tie_breaks_before_computing_evicted_files_fcfs_score;
-//~ int total_number_of_scores_computed;
-//~ int data_persistence_exploited;
-//~ #endif
-//~ int biggest_hole;
-//~ int biggest_hole_unique_id;
-//~ int global_nb_non_available_cores_at_time_t;
-//~ int nb_data_reuse;
-//~ int busy_cluster_threshold;
 
 int main(int argc, char *argv[])
 {
@@ -148,7 +107,7 @@ int main(int argc, char *argv[])
 	}
 	
 	/* Printing results */
-	print_csv(jobs_to_print_list->head);
+	print_csv_container(jobs_to_print_list->head);
 	
 	printf("Finished simulation!¡ \\o/ (°o°) !¡\n");
 	return 1;
