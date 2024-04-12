@@ -91,6 +91,8 @@ void read_workload(char* input_job_file)
         
         insert_tail_job_list(job_list, new);
         total_number_jobs++;
+        
+        if (total_number_jobs%50000 == 0) { printf("Read %d jobs\n", total_number_jobs); }
     }
     
 	fclose(f);

@@ -8,6 +8,7 @@ sns.set_theme(style='whitegrid', context='paper', font_scale=1.75, rc={'axes.fac
 input_file = sys.argv[1]
 nmodes = int(sys.argv[2])
 mode = sys.argv[3]
+database_type = sys.argv[4]
 
 measured_metric = [0]*nmodes # First tab cell is for user 0 then 1, etc...
 
@@ -84,9 +85,10 @@ if mode != "stretch":
 	plt.xticks(x, labels, rotation=42)
 else:
 	colors = ["#ffedbf", "#ffca7b", "#ff7251", "#9b2948"]
-	columns = [list_of_improvement_from_always_cold[0], list_of_improvement_from_always_cold[1], list_of_improvement_from_always_cold[2]]
+	columns = [list_of_improvement_from_always_cold[0], list_of_improvement_from_always_cold[1], list_of_improvement_from_always_cold[2], list_of_improvement_from_always_cold[3]]
 	fig = sns.boxplot(data=columns, whis=[12.5, 100 - 12.5], palette=colors, showmeans = True, showfliers = False)
 	plt.ylim(4.75, 5.75)
+	labels = ['Hot for 5min', 'Hot for 10min', 'Hot for 15min', 'Always hot']
 	
 if mode == "total_start_time":
 	plt.ylabel("Total start times (s)")
@@ -105,6 +107,6 @@ elif mode == "stretch":
 	mode_name = "stretch"
 
 # Saving plots
-fig_name = "plot/" + str(Nlines/nmodes) + "_jobs_" + str(nmodes) + "_modes_" + mode_name + ".pdf"
+fig_name = "plot/" + database_type + "_" + str(Nlines/nmodes) + "_jobs_" + str(nmodes) + "_modes_" + mode_name + ".pdf"
 print("Saved in", fig_name)
 plt.savefig(fig_name, bbox_inches='tight')

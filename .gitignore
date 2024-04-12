@@ -3,3 +3,6 @@ data/all_top_10/.ipynb_checkpoints
 my_data.csv
 my_data_sorted.csv
 simulator/src/main
+my_data_sorted_all_top_10.csv
+my_data_sorted_cluster_top_10.csv
+my_data_sorted_vanilla_approach.csv
