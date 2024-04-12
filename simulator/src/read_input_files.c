@@ -39,6 +39,7 @@ void read_workload(char* input_job_file)
 
         while (token != NULL)
         {
+			printf("%s /", token);
 			switch (index)
 			{
 				case 4: /* Submission time */
@@ -57,6 +58,8 @@ void read_workload(char* input_job_file)
 					break;
 				case 11: /* Start time cold */
 					new->start_time_cold = atof(token);
+					printf("\nNew runtime: %f\n", new->start_time_cold);
+					if (new->start_time_cold == -1) { exit(1); }
 					break;
 				case 14: /* Start time hot 1 */
 					total_start_time_hot += atof(token);
@@ -84,6 +87,7 @@ void read_workload(char* input_job_file)
     }
     
 	fclose(f);
+	exit(1);
 	printf("Finished reading workload.\n");
 }
 
