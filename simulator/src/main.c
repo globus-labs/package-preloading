@@ -48,15 +48,16 @@ int main(int argc, char *argv[])
 	
 	int i = 0;
 	int k = 0;
-	
+
 	/**
 	 * Different modes evaluated.
 	 * 0: always cold
-	 * 1: always hot
-	 * 2: warm for 5 minutes
-	 * 3: warm for 10 minutes
+	 * 1: warm for 5 minutes # default mean
+	 * 2: warm for 10 minutes
+	 * 3: warm for 15 minutes # default higher values
+	 * 4: always hot
 	 **/
-	int number_of_containers_mode = 4;
+	int number_of_containers_mode = 5;
 	
 	/** START OF SIMULATION **/
 	printf("\nStart simulation.\n");
@@ -67,7 +68,7 @@ int main(int argc, char *argv[])
 		job_pointer = job_list->head;
 		for (i = 0; i < total_number_jobs; i++)
 		{
-			if (i%1 == 0)
+			if (i%50000 == 0)
 			{
 				printf("Mode %d: %d/%d\n", k, i+1, total_number_jobs);
 			}
@@ -85,13 +86,16 @@ int main(int argc, char *argv[])
 					cold_start(job_pointer, new_to_print);
 					break;
 				case 1:
-					hot_start(job_pointer, new_to_print, 0);
+					hot_start(job_pointer, new_to_print, 5*60);
 					break;
 				case 2:
 					hot_start(job_pointer, new_to_print, 10*60);
 					break;
 				case 3:
-					hot_start(job_pointer, new_to_print, 100*60);
+					hot_start(job_pointer, new_to_print, 15*60);
+					break;
+				case 4:
+					hot_start(job_pointer, new_to_print, -1);
 					break;
 			}
 						

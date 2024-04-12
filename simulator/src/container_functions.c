@@ -12,8 +12,8 @@ void cold_start(struct Job* j, struct To_Print* new_to_print)
  **/
 void hot_start(struct Job* j, struct To_Print* new_to_print, int max_time_between_hot_start)
 {
-	printf("Début de hot_start\n");
-	print_valid_build_times(valid_build_list->head);
+	//~ printf("Début de hot_start\n");
+	//~ print_valid_build_times(valid_build_list->head);
 	bool hot_start_available = false;
 	bool function_available = false;
 	struct Valid_Build* valid_build = (struct Valid_Build*) malloc(sizeof(struct Valid_Build));
@@ -23,11 +23,11 @@ void hot_start(struct Job* j, struct To_Print* new_to_print, int max_time_betwee
 		if (strcmp(valid_build->job_name, j->function_name) == 0)
 		{
 			function_available = true;
-			printf("Same function %s\n", j->function_name);
-			printf("valid_build->earliest_valid_build_complete <= j->subtime?: %f %f\n", valid_build->earliest_valid_build_complete, j->subtime);
-			if (valid_build->earliest_valid_build_complete <= j->subtime && valid_build->latest_valid_finish_time >= j->subtime)
+			//~ printf("Same function %s\n", j->function_name);
+			//~ printf("valid_build->earliest_valid_build_complete <= j->subtime?: %f %f\n", valid_build->earliest_valid_build_complete, j->subtime);
+			if (max_time_between_hot_start == -1 || (valid_build->earliest_valid_build_complete <= j->subtime && valid_build->latest_valid_finish_time >= j->subtime))
 			{
-				printf("hot_start_available\n");
+				//~ printf("hot_start_available\n");
 				hot_start_available = true;
 			}
 			break;
@@ -87,6 +87,6 @@ void update_valid_build_times(struct Valid_Build* vb, double build_complete_time
 		vb->latest_valid_finish_time = finish_time;
 	}
 	
-	printf("Print after update of times\n");
-	print_valid_build_times(valid_build_list->head);
+	//~ printf("Print after update of times\n");
+	//~ print_valid_build_times(valid_build_list->head);
 }
