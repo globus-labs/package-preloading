@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 
-# bash run.sh ../my_data_sorted_all_top_10.csv outputs/my_data_sorted_all_top_10.csv 5 all_top_10
-# bash run.sh ../my_data_sorted_cluster_top_10.csv outputs/my_data_sorted_cluster_top_10.csv 5 cluster_top_10
-# bash run.sh ../my_data_sorted_vanilla_approach.csv outputs/my_data_sorted_vanilla_approach.csv 5 vanilla_approach
+# bash run.sh ../all_top_10_data_sorted_no_NaN.csv outputs/all_top_10_data_sorted_no_NaN.csv 5 all_top_10
+# bash run.sh ../cluster_top_10_data_sorted_no_NaN.csv outputs/cluster_top_10_data_sorted_no_NaN.csv 5 cluster_top_10
+# bash run.sh ../vanilla_approach_data_sorted_no_NaN.csv outputs/vanilla_approach_data_sorted_no_NaN.csv 5 vanilla_approach
 
 workload=$1
 output=$2
