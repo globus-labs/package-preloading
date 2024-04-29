@@ -11,10 +11,10 @@ type=$4
 
 make -C src/
 
-./src/main ${workload} no_schedule ${output}
+#~ ./src/main ${workload} no_schedule ${output}
 
-python3 src/plot.py ${output} ${nmodes} "total_start_time" ${type}
-python3 src/plot.py ${output} ${nmodes} "total_build_time" ${type}
+#~ python3 src/plot.py ${output} ${nmodes} "total_start_time" ${type}
+#~ python3 src/plot.py ${output} ${nmodes} "total_build_time" ${type}
 python3 src/plot.py ${output} ${nmodes} "total_start_and_build_time" ${type}
 python3 src/plot.py ${output} ${nmodes} "total_start_and_build_and_run_time" ${type}
-python3 src/plot.py ${output} ${nmodes} "stretch" ${type}
+#~ python3 src/plot.py ${output} ${nmodes} "stretch" ${type}

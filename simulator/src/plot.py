@@ -70,6 +70,8 @@ elif mode == "stretch":
 else:
 	print("ERROR: Wrong mode in plot_batrplots.py")
 
+print(measured_metric)
+
 if mode != "stretch":
 	# Settings of the plot
 	bar_width = 0.2
@@ -97,7 +99,7 @@ elif mode == "total_build_time":
 	plt.ylabel("Total build times (s)")
 	mode_name = "build"
 elif mode == "total_start_and_build_time":
-	plt.ylabel("Total start and build times (s)")
+	plt.ylabel("Total Environment Setup Time (s)")
 	mode_name = "start_and_build"
 elif mode == "total_start_and_build_and_run_time":
 	plt.ylabel("Total flow (s)")
