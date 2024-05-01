@@ -4,11 +4,29 @@ getTime <- function(x){
   as.numeric(gsub("s", "", tail(unlist(strsplit(x," ")),1)))
 }
 
-folder <- "intelligent"
+getInstall <- function(app){
+  if(grepl("install", app[1])){
+    ins.start <- unlist(strsplit(app[grepl("install", app)], " "))[1]
+    ins.stop <- unlist(strsplit(app[which(grepl("start$", app))-1], " "))[1]
+    
+    ins.stop <- as.POSIXct(ins.stop, format = "%Y-%m-%dT%H:%M:%OSZ") 
+    ins.start <- as.POSIXct(ins.start, format = "%Y-%m-%dT%H:%M:%OSZ")
+    
+    installtime <- as.numeric(ins.stop - ins.start)
+    
+  } else {
+    installtime <- -1
+    
+  }
+  
+  return(installtime)
+}
+
+folder <- "onthefly"
 setwd("~")
 dirs <- list.dirs(folder)
 
-for(run in 1:10){
+for(run in 1:1){
   data <- c()
   
   for(d in dirs[-1]){
@@ -19,23 +37,22 @@ for(run in 1:10){
     times <- build[grepl("DONE", build)]
     times <- sapply(times, getTime)
     
-    installtime <- build[grepl("RUN cat requirements.txt", build)]
-    if(length(installtime)==0){
-      installtime <- -1
-    } else {
-      ind <- unlist(strsplit(installtime," "))[1]
-      installtime <- times[grepl(ind, names(times))]
-    }
-    
     js <- read_json(paste("con",run,".txt", sep=""))
-    
     created <- js[[1]]$Created
     started <- js[[1]]$State$StartedAt
     finished <- js[[1]]$State$FinishedAt
     
     app <- readLines(paste("run",run,".txt",sep=""))
-    import.start <- unlist(strsplit(app[3], " "))[1]
-    import.stop <- unlist(strsplit(app[4], " "))[1]
+    import.start <- unlist(strsplit(app[grepl("start loading", app)], " "))[1]
+    import.stop <- unlist(strsplit(app[grepl("finish import", app)], " "))[1]
+    
+    if(is.null(import.stop)){
+      import.stop <- unlist(strsplit(app[length(app)], " "))[1]
+    }
+    
+    installtime <- getInstall(app)
+    
+
     
     info <- cbind(unlist(strsplit(d,"/"))[2], sum(times), 
                   installtime, created, started, finished, import.start, import.stop)
@@ -48,10 +65,16 @@ for(run in 1:10){
       finished <- js[[1]]$State$FinishedAt
       
       app <- readLines(paste("run",run,"_", j,".txt",sep=""))
-      import.start <- unlist(strsplit(app[3], " "))[1]
-      import.stop <- unlist(strsplit(app[4], " "))[1]
+      import.start <- unlist(strsplit(app[grepl("start loading", app)], " "))[1]
+      import.stop <- unlist(strsplit(app[grepl("finish import", app)], " "))[1]
       
-      info <- cbind(info, created, started, finished, import.start, import.stop, 0)
+      if(is.null(import.stop)){
+        import.stop <- unlist(strsplit(app[length(app)], " "))[1]
+      }
+      
+      installtime <- getInstall(app)
+      
+      info <- cbind(info, created, started, finished, import.start, import.stop, installtime)
     }
     
     data <- rbind(data, info)
