@@ -9,4 +9,5 @@ my_data_sorted_vanilla_approach.csv
 all_top_10_data_sorted_no_NaN.csv
 cluster_top_10_data_sorted_no_NaN.csv
 vanilla_approach_data_sorted_no_NaN.csv
-
+latest_input_data/
+outputs/
