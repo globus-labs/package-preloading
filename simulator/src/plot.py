@@ -72,7 +72,7 @@ else:
 
 print(measured_metric)
 
-if mode != "stretch":
+if mode != "stretch" and mode != "total_start_and_build_and_run_time":
 	# Settings of the plot
 	bar_width = 0.2
 	separation_between_bars=0.3
@@ -84,6 +84,19 @@ if mode != "stretch":
 		plt.bar((i+1)*separation_between_bars, measured_metric[i], bar_width, color=colors[i])
 
 	labels = ['Always cold', 'Hot for 5min', 'Hot for 10min', 'Hot for 15min', 'Always hot']
+	plt.xticks(x, labels, rotation=42)
+elif mode == "total_start_and_build_and_run_time":
+	# Settings of the plot
+	bar_width = 0.2
+	separation_between_bars=0.3
+			
+	x = [1*separation_between_bars, 2*separation_between_bars]
+	colors = ["#C8E9E9", "#ffedbf"]
+
+	for i in range (0, nmodes-3):
+		plt.bar((i+1)*separation_between_bars, measured_metric[i], bar_width, color=colors[i])
+
+	labels = ['Always cold', 'Hot for 5min']
 	plt.xticks(x, labels, rotation=42)
 else:
 	colors = ["#ffedbf", "#ffca7b", "#ff7251", "#9b2948"]
